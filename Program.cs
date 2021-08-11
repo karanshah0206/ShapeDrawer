@@ -1,16 +1,21 @@
 using System;
 using SplashKitSDK;
-public class Program
+namespace ShapeDrawer
 {
-    public static void Main()
+    public class Program
     {
-        new Window("Shape Drawer", 800, 600);
-        do
+        public static void Main()
         {
-            SplashKit.ProcessEvents();
-            SplashKit.ClearScreen();
+            Shape myShape = new Shape();
+            new Window("Shape Drawer", 800, 600);
 
-            SplashKit.RefreshScreen();
-        } while (!SplashKit.WindowCloseRequested("Shape Drawer"));
+            do
+            {
+                SplashKit.ProcessEvents();
+                SplashKit.ClearScreen();
+                myShape.Draw();
+                SplashKit.RefreshScreen();
+            } while (!SplashKit.WindowCloseRequested("Shape Drawer"));
+        }
     }
 }
