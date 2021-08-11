@@ -56,5 +56,13 @@ namespace ShapeDrawer
         {
             SplashKit.FillRectangle(_color, _x, _y, _width, _height);
         }
+
+        public bool IsAt(Point2D pt)
+        {
+            if (pt.X >= _x && pt.X <= (_x + _width))
+                if (pt.Y >= _y && pt.Y <= (_y + _height))
+                    return true;
+            return false;
+        }
     }
 }
