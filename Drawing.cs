@@ -46,7 +46,15 @@ namespace ShapeDrawer
         }
 
         public void SelectShapesAt(Point2D pt)
-        { }
+        {
+            foreach(Shape shape in _shapes)
+            {
+                if (shape.IsAt(pt))
+                    shape.Selected = true;
+                else
+                    shape.Selected = false;
+            }
+        }
 
         public void AddShape(Shape s)
         {
@@ -54,6 +62,8 @@ namespace ShapeDrawer
         }
 
         public void RemoveShape(Shape s)
-        { }
+        {
+            _shapes.Remove(s);
+        }
     }
 }

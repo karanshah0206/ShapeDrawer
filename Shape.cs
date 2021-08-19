@@ -57,7 +57,14 @@ namespace ShapeDrawer
 
         public void Draw()
         {
+            if (_selected)
+                DrawOutline();
             SplashKit.FillRectangle(_color, _x, _y, _width, _height);
+        }
+
+        public void DrawOutline()
+        {
+            SplashKit.FillRectangle(Color.Black, _x - 2, _y - 2, _width + 4, _height + 4);
         }
 
         public bool IsAt(Point2D pt)

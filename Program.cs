@@ -22,9 +22,22 @@ namespace ShapeDrawer
                     canvas.AddShape(myShape);
                 }
 
+                if (SplashKit.MouseClicked(MouseButton.RightButton))
+                {
+                    canvas.SelectShapesAt(SplashKit.MousePosition());
+                }
+
                 if (SplashKit.KeyTyped(KeyCode.SpaceKey))
                 {
                     canvas.Background = Color.RandomRGB(255);
+                }
+
+                if (SplashKit.KeyTyped(KeyCode.DeleteKey) || SplashKit.KeyTyped(KeyCode.BackspaceKey))
+                {
+                    foreach(Shape shape in canvas.SelectedShapes)
+                    {
+                        canvas.RemoveShape(shape);
+                    }
                 }
 
                 SplashKit.RefreshScreen();
