@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SplashKitSDK;
+﻿using SplashKitSDK;
 
 namespace ShapeDrawer
 {
@@ -12,6 +7,7 @@ namespace ShapeDrawer
         private int _width, _height;
         private float _x, _y;
         private Color _color;
+        private bool _selected;
 
         public Shape()
         {
@@ -50,6 +46,12 @@ namespace ShapeDrawer
         {
             get { return _height; }
             set { _height = value; }
+        }
+
+        public bool Selected
+        {
+            get { return _selected; }
+            set { _selected = value; }
         }
 
         public void Draw()

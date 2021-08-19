@@ -1,37 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using SplashKitSDK;
 
 namespace ShapeDrawer
 {
     class Drawing
     {
-        private List<Shape> _shapes = new List<Shape>();
+        private List<Shape> _shapes;
         private Color _background;
 
-        public Drawing()
-        { }
+        public Drawing(Color background)
+        {
+            _shapes = new List<Shape>();
+            _background = background;
+        }
+
+        public Drawing() : this (Color.White) { }
 
         public List<Shape> SelectedShapes
-        { /* Add get handle here */ }
+        {
+            get
+            {
+                List<Shape> SelectedShapes = new List<Shape>();
+                foreach(Shape shape in _shapes)
+                    if (shape.Selected)
+                        SelectedShapes.Add(shape);
+                return SelectedShapes;
+            }
+        }
 
         public int ShapeCount
-        { /* Add get handle here */ }
+        {
+            get { return _shapes.Count; }
+        }
 
         public Color Background
-        { /* Add get, set handles here */ }
+        {
+            get { return _background; }
+            set { _background = value; }
+        }
 
         public void Draw()
-        { }
+        {
+            SplashKit.ClearScreen(_background);
+            foreach(Shape shape in _shapes) { shape.Draw(); }
+        }
 
         public void SelectShapesAt(Point2D pt)
         { }
 
         public void AddShape(Shape s)
-        { }
+        {
+            _shapes.Add(s);
+        }
 
         public void RemoveShape(Shape s)
         { }
