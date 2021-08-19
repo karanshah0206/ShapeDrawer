@@ -6,26 +6,26 @@ namespace ShapeDrawer
     {
         public static void Main()
         {
-            Shape myShape = new Shape();
+            Drawing canvas = new Drawing();
             new Window("Shape Drawer", 800, 600);
 
             do
             {
                 SplashKit.ProcessEvents();
-                SplashKit.ClearScreen();
+                canvas.Draw();
 
                 if (SplashKit.MouseClicked(MouseButton.LeftButton))
                 {
+                    Shape myShape = new Shape();
                     myShape.X = SplashKit.MouseX();
                     myShape.Y = SplashKit.MouseY();
+                    canvas.AddShape(myShape);
                 }
 
-                if (SplashKit.KeyTyped(KeyCode.SpaceKey) && myShape.IsAt(SplashKit.MousePosition()))
+                if (SplashKit.KeyTyped(KeyCode.SpaceKey))
                 {
-                    myShape.Color = SplashKit.RandomRGBColor(255);
+                    canvas.Background = Color.RandomRGB(255);
                 }
-
-                myShape.Draw();
 
                 SplashKit.RefreshScreen();
             } while (!SplashKit.WindowCloseRequested("Shape Drawer"));
