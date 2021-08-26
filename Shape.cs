@@ -1,21 +1,22 @@
-﻿using SplashKitSDK;
+﻿using System;
+using SplashKitSDK;
 
 namespace ShapeDrawer
 {
-    class Shape
+    abstract class Shape
     {
-        private int _width, _height;
         protected float _x, _y;
         protected Color _color;
         protected bool _selected;
 
-        public Shape()
+        public Shape() : this(Color.Yellow)
+        { }
+
+        public Shape(Color clr)
         {
+            _color = clr;
             _x = 0;
             _y = 0;
-            _width = 100;
-            _height = 100;
-            _color = Color.Green;
             _selected = false;
         }
 
@@ -37,42 +38,14 @@ namespace ShapeDrawer
             set { _y = value; }
         }
 
-        public int Width
-        {
-            get { return _width; }
-            set { _width = value; }
-        }
-
-        public int Height
-        {
-            get { return _height; }
-            set { _height = value; }
-        }
-
         public bool Selected
         {
             get { return _selected; }
             set { _selected = value; }
         }
 
-        public virtual void Draw()
-        {
-            if (_selected)
-                DrawOutline();
-            SplashKit.FillRectangle(_color, _x, _y, _width, _height);
-        }
-
-        public virtual void DrawOutline()
-        {
-            SplashKit.FillRectangle(Color.Black, _x - 2, _y - 2, _width + 4, _height + 4);
-        }
-
-        public bool IsAt(Point2D pt)
-        {
-            if (pt.X >= _x && pt.X <= (_x + _width))
-                if (pt.Y >= _y && pt.Y <= (_y + _height))
-                    return true;
-            return false;
-        }
+        public abstract void Draw();
+        public abstract void DrawOutline();
+        public abstract bool IsAt(Point2D pt);
     }
 }

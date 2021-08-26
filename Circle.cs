@@ -1,4 +1,5 @@
-﻿using SplashKitSDK;
+﻿using System;
+using SplashKitSDK;
 
 namespace ShapeDrawer
 {
@@ -6,8 +7,12 @@ namespace ShapeDrawer
     {
         private int _radius;
 
-        public Circle()
+        public Circle() : this(Color.Blue, 50)
+        { }
+
+        public Circle(Color clr, int radius)
         {
+            _color = clr;
             _radius = 50;
         }
 
@@ -26,6 +31,11 @@ namespace ShapeDrawer
         public override void DrawOutline()
         {
             SplashKit.FillCircle(Color.Black, _x, _y, _radius+2);
+        }
+
+        public override bool IsAt(Point2D pt)
+        {
+            return ((Math.Abs(pt.X - _x) <= _radius) && (Math.Abs(pt.Y - _y) <= _radius));
         }
     }
 }
