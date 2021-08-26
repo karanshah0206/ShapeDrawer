@@ -10,9 +10,8 @@ namespace ShapeDrawer
         public Circle() : this(Color.Blue, 50)
         { }
 
-        public Circle(Color clr, int radius)
+        public Circle(Color clr, int radius) : base(clr)
         {
-            _color = clr;
             _radius = 50;
         }
 

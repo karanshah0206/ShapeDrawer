@@ -7,7 +7,8 @@ namespace ShapeDrawer
         private enum ShapeKind
         {
             Rectangle,
-            Circle
+            Circle,
+            Line
         }
 
         public static void Main()
@@ -26,15 +27,21 @@ namespace ShapeDrawer
                 {
                     Shape myShape;
 
-                    if (kindToAdd == ShapeKind.Rectangle)
+                    switch(kindToAdd)
                     {
-                        Rectangle myRect = new Rectangle();
-                        myShape = myRect;
-                    }
-                    else
-                    {
-                        Circle myCircle = new Circle();
-                        myShape = myCircle;
+                        case ShapeKind.Rectangle:
+                            Rectangle myRect = new Rectangle();
+                            myShape = myRect;
+                            break;
+                        case ShapeKind.Circle:
+                            Circle myCircle = new Circle();
+                            myShape = myCircle;
+                            break;
+                        case ShapeKind.Line:
+                            Line myLine = new Line();
+                            myShape = myLine;
+                            break;
+                        default: goto case ShapeKind.Rectangle;
                     }
 
                     myShape.X = SplashKit.MouseX();
@@ -43,29 +50,15 @@ namespace ShapeDrawer
                 }
 
                 if (SplashKit.MouseClicked(MouseButton.RightButton))
-                {
                     canvas.SelectShapesAt(SplashKit.MousePosition());
-                }
 
-                if (SplashKit.KeyTyped(KeyCode.SpaceKey))
-                {
-                    canvas.Background = Color.RandomRGB(255);
-                }
-                else if (SplashKit.KeyTyped(KeyCode.RKey))
-                {
-                    kindToAdd = ShapeKind.Rectangle;
-                }
-                else if (SplashKit.KeyTyped(KeyCode.CKey))
-                {
-                    kindToAdd = ShapeKind.Circle;
-                }
+                if (SplashKit.KeyTyped(KeyCode.SpaceKey)) canvas.Background = Color.RandomRGB(255);
+                else if (SplashKit.KeyTyped(KeyCode.RKey)) kindToAdd = ShapeKind.Rectangle;
+                else if (SplashKit.KeyTyped(KeyCode.CKey)) kindToAdd = ShapeKind.Circle;
+                else if (SplashKit.KeyTyped(KeyCode.LKey)) kindToAdd = ShapeKind.Line;
                 else if (SplashKit.KeyTyped(KeyCode.DeleteKey) || SplashKit.KeyTyped(KeyCode.BackspaceKey))
-                {
                     foreach(Shape shape in canvas.SelectedShapes)
-                    {
                         canvas.RemoveShape(shape);
-                    }
-                }
 
                 SplashKit.RefreshScreen();
             } while (!SplashKit.WindowCloseRequested("Shape Drawer"));
