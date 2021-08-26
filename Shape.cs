@@ -5,9 +5,9 @@ namespace ShapeDrawer
     class Shape
     {
         private int _width, _height;
-        private float _x, _y;
-        private Color _color;
-        private bool _selected;
+        protected float _x, _y;
+        protected Color _color;
+        protected bool _selected;
 
         public Shape()
         {
@@ -55,14 +55,14 @@ namespace ShapeDrawer
             set { _selected = value; }
         }
 
-        public void Draw()
+        public virtual void Draw()
         {
             if (_selected)
                 DrawOutline();
             SplashKit.FillRectangle(_color, _x, _y, _width, _height);
         }
 
-        public void DrawOutline()
+        public virtual void DrawOutline()
         {
             SplashKit.FillRectangle(Color.Black, _x - 2, _y - 2, _width + 4, _height + 4);
         }
