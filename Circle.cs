@@ -12,7 +12,7 @@ namespace ShapeDrawer
 
         public Circle(Color clr, int radius) : base(clr)
         {
-            _radius = 50;
+            _radius = radius;
         }
 
         public int Radius
