@@ -44,5 +44,11 @@ namespace ShapeDrawer
             base.SaveTo(writer); // Write Color + Coordinates
             writer.WriteLine(_radius); // Write Radius
         }
+
+        public override void LoadFrom(StreamReader reader)
+        {
+            base.LoadFrom(reader); // Read Color + Coordinates
+            _radius = reader.ReadInteger(); // Read Radius
+        }
     }
 }

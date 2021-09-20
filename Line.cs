@@ -49,5 +49,12 @@ namespace ShapeDrawer
             writer.WriteLine(_length); // Write Length
             writer.WriteLine(_depth); // Write Depth
         }
+
+        public override void LoadFrom(StreamReader reader)
+        {
+            base.LoadFrom(reader); // Read Color + Coordinates
+            _length = reader.ReadInteger(); // Read Length
+            _depth = reader.ReadInteger(); // Read Depth
+        }
     }
 }
