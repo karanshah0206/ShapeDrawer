@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using SplashKitSDK;
 
 namespace ShapeDrawer
@@ -35,6 +36,13 @@ namespace ShapeDrawer
         public override bool IsAt(Point2D pt)
         {
             return ((Math.Abs(pt.X - _x) <= _radius) && (Math.Abs(pt.Y - _y) <= _radius));
+        }
+
+        public override void SaveTo(StreamWriter writer)
+        {
+            writer.WriteLine("Circle"); // Write Shape Type
+            base.SaveTo(writer); // Write Color + Coordinates
+            writer.WriteLine(_radius); // Write Radius
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using SplashKitSDK;
+using System.IO;
 
 namespace ShapeDrawer
 {
@@ -43,6 +44,14 @@ namespace ShapeDrawer
         public override bool IsAt(Point2D pt)
         {
             return ((pt.X >= _x && pt.X <= (_x + _width)) && (pt.Y >= _y && pt.Y <= (_y + _height)));
+        }
+
+        public override void SaveTo(StreamWriter writer)
+        {
+            writer.WriteLine("Rectangle"); // Write Shape Type
+            base.SaveTo(writer); // Write Color + Coordinates
+            writer.WriteLine(_width); // Write Width
+            writer.WriteLine(_height); // Write Height
         }
     }
 }

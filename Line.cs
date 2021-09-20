@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using SplashKitSDK;
 
 namespace ShapeDrawer
@@ -39,6 +40,14 @@ namespace ShapeDrawer
             float lineSlope = _depth/_length;
             float ptSlope = (float)((pt.Y - _y)/(pt.X - _x));
             return ((lineSlope == ptSlope) && (pt.X >= _x) && (pt.X <= _x + _length) && (pt.Y >= _y) && (pt.Y <= _y + _depth));
+        }
+
+        public override void SaveTo(StreamWriter writer)
+        {
+            writer.WriteLine("Line"); // Write Shape Type
+            base.SaveTo(writer); // Write Color + Coordinates
+            writer.WriteLine(_length); // Write Length
+            writer.WriteLine(_depth); // Write Depth
         }
     }
 }
