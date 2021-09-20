@@ -80,5 +80,32 @@ namespace ShapeDrawer
 
             writer.Close();
         }
+
+        public void Load(string filename)
+        {
+            StreamReader reader = new StreamReader(filename);
+            int count; string kind; Shape s;
+
+            _shapes.Clear(); // Clear Canvas
+
+            _background = reader.ReadColor(); // Read + Set Background Color
+            count = reader.ReadInteger(); // Read Shape Count
+
+            for (int i = 0; i < count; i++)
+            {
+                kind = reader.ReadLine(); // Read Shape Type
+                switch (kind)
+                {
+                    case "Rectangle": s = new Rectangle(); break;
+                    case "Circle": s = new Circle(); break;
+                    case "Line": s = new Line(); break;
+                    default: continue;
+                }
+                s.LoadFrom(reader); // Read Shape Color + Coordinates + Dimensions
+                AddShape(s); // Draw Shape
+            }
+
+            reader.Close();
+        }
     }
 }

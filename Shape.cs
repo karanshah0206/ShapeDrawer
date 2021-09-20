@@ -51,6 +51,13 @@ namespace ShapeDrawer
             writer.WriteLine(_y); // Write Y Coordinate
         }
 
+        public virtual void LoadFrom(StreamReader reader)
+        {
+            _color = reader.ReadColor(); // Read Color
+            _x = reader.ReadInteger(); // Read X Coordinate
+            _y = reader.ReadInteger(); // Read Y Coordinate
+        }
+
         public abstract void Draw();
         public abstract void DrawOutline();
         public abstract bool IsAt(Point2D pt);
