@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using SplashKitSDK;
 
@@ -86,26 +87,28 @@ namespace ShapeDrawer
             StreamReader reader = new StreamReader(filename);
             int count; string kind; Shape s;
 
-            _shapes.Clear(); // Clear Canvas
+            try {
+                _shapes.Clear(); // Clear Canvas
 
-            _background = reader.ReadColor(); // Read + Set Background Color
-            count = reader.ReadInteger(); // Read Shape Count
+                _background = reader.ReadColor(); // Read + Set Background Color
+                count = reader.ReadInteger(); // Read Shape Count
 
-            for (int i = 0; i < count; i++)
-            {
-                kind = reader.ReadLine(); // Read Shape Type
-                switch (kind)
+                for (int i = 0; i < count; i++)
                 {
-                    case "Rectangle": s = new Rectangle(); break;
-                    case "Circle": s = new Circle(); break;
-                    case "Line": s = new Line(); break;
-                    default: continue;
+                    kind = reader.ReadLine(); // Read Shape Type
+                    switch (kind)
+                    {
+                        case "Rectangle": s = new Rectangle(); break;
+                        case "Circle": s = new Circle(); break;
+                        case "Line": s = new Line(); break;
+                        default: throw new InvalidDataException("Unknown Shape Kind: " + kind);
+                    }
+                    s.LoadFrom(reader); // Read Shape Color + Coordinates + Dimensions
+                    AddShape(s); // Draw Shape
                 }
-                s.LoadFrom(reader); // Read Shape Color + Coordinates + Dimensions
-                AddShape(s); // Draw Shape
             }
-
-            reader.Close();
+            catch (Exception e) { Console.Error.WriteLine("Error in loading file: " + e.Message); }
+            finally { reader.Close(); }
         }
     }
 }

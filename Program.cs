@@ -58,7 +58,9 @@ namespace ShapeDrawer
                 else if (SplashKit.KeyTyped(KeyCode.CKey)) kindToAdd = ShapeKind.Circle;
                 else if (SplashKit.KeyTyped(KeyCode.LKey)) kindToAdd = ShapeKind.Line;
                 else if (SplashKit.KeyTyped(KeyCode.SKey)) canvas.Save(savePath);
-                else if (SplashKit.KeyTyped(KeyCode.OKey)) canvas.Load(savePath);
+                else if (SplashKit.KeyTyped(KeyCode.OKey))
+                    try { canvas.Load(savePath); }
+                    catch (Exception e) { Console.Error.WriteLine("Error in loading file: {0}", e.Message); }
                 else if (SplashKit.KeyTyped(KeyCode.DeleteKey) || SplashKit.KeyTyped(KeyCode.BackspaceKey))
                     foreach (Shape shape in canvas.SelectedShapes)
                         canvas.RemoveShape(shape);
