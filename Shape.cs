@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.IO;
 using SplashKitSDK;
 
 namespace ShapeDrawer
@@ -42,6 +42,13 @@ namespace ShapeDrawer
         {
             get { return _selected; }
             set { _selected = value; }
+        }
+
+        public virtual void SaveTo(StreamWriter writer)
+        {
+            writer.WriteColor(_color); // Write Color
+            writer.WriteLine(_x); // Write X Coordinate
+            writer.WriteLine(_y); // Write Y Coordinate
         }
 
         public abstract void Draw();

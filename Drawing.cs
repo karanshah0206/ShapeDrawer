@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using SplashKitSDK;
 
 namespace ShapeDrawer
@@ -64,6 +65,20 @@ namespace ShapeDrawer
         public void RemoveShape(Shape s)
         {
             _shapes.Remove(s);
+        }
+
+        public void Save(string filename)
+        {
+            StreamWriter writer = new StreamWriter(filename);
+
+            writer.WriteColor(_background); // Write Background Color
+            writer.WriteLine(_shapes.Count); // Write Shape Count
+
+            // Save Shapes
+            foreach (Shape s in _shapes)
+            { s.SaveTo(writer); }
+
+            writer.Close();
         }
     }
 }
