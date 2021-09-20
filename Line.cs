@@ -44,7 +44,6 @@ namespace ShapeDrawer
 
         public override void SaveTo(StreamWriter writer)
         {
-            writer.WriteLine("Line"); // Write Shape Type
             base.SaveTo(writer); // Write Color + Coordinates
             writer.WriteLine(_length); // Write Length
             writer.WriteLine(_depth); // Write Depth

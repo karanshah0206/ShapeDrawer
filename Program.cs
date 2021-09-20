@@ -13,6 +13,10 @@ namespace ShapeDrawer
 
         public static void Main()
         {
+            Shape.RegisterShape("Rectangle", typeof(Rectangle));
+            Shape.RegisterShape("Circle", typeof(Circle));
+            Shape.RegisterShape("Line", typeof(Line));
+
             ShapeKind kindToAdd = ShapeKind.Circle;
             String savePath  = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/TestDrawing.txt";
 

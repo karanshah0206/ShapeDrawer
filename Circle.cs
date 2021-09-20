@@ -40,7 +40,6 @@ namespace ShapeDrawer
 
         public override void SaveTo(StreamWriter writer)
         {
-            writer.WriteLine("Circle"); // Write Shape Type
             base.SaveTo(writer); // Write Color + Coordinates
             writer.WriteLine(_radius); // Write Radius
         }

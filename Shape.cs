@@ -1,10 +1,25 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using SplashKitSDK;
 
 namespace ShapeDrawer
 {
     abstract class Shape
     {
+        private static Dictionary<string, Type> _ShapeClassRegistry = new Dictionary<string, Type>();
+        public static void RegisterShape(string name, Type t)
+        { _ShapeClassRegistry[name] = t; }
+        public static Shape CreateShape(string name)
+        { return (Shape)Activator.CreateInstance(_ShapeClassRegistry[name]); }
+        public static string GetKindFromType(Type t)
+        {
+            foreach (string s in _ShapeClassRegistry.Keys)
+                if (t == _ShapeClassRegistry[s])
+                    return s;
+            return null;
+        }
+
         protected float _x, _y;
         protected Color _color;
         protected bool _selected;
@@ -46,6 +61,7 @@ namespace ShapeDrawer
 
         public virtual void SaveTo(StreamWriter writer)
         {
+            writer.WriteLine(GetKindFromType(this.GetType())); // Write Shape Type
             writer.WriteColor(_color); // Write Color
             writer.WriteLine(_x); // Write X Coordinate
             writer.WriteLine(_y); // Write Y Coordinate

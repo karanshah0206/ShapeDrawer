@@ -96,13 +96,7 @@ namespace ShapeDrawer
                 for (int i = 0; i < count; i++)
                 {
                     kind = reader.ReadLine(); // Read Shape Type
-                    switch (kind)
-                    {
-                        case "Rectangle": s = new Rectangle(); break;
-                        case "Circle": s = new Circle(); break;
-                        case "Line": s = new Line(); break;
-                        default: throw new InvalidDataException("Unknown Shape Kind: " + kind);
-                    }
+                    s = Shape.CreateShape(kind); // Read Shape Color + Coordinates + Dimensions
                     s.LoadFrom(reader); // Read Shape Color + Coordinates + Dimensions
                     AddShape(s); // Draw Shape
                 }
