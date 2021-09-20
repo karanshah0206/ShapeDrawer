@@ -14,6 +14,7 @@ namespace ShapeDrawer
         public static void Main()
         {
             ShapeKind kindToAdd = ShapeKind.Circle;
+            String savePath  = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/TestDrawing.txt";
 
             Drawing canvas = new Drawing();
             new Window("Shape Drawer", 800, 600);
@@ -56,8 +57,9 @@ namespace ShapeDrawer
                 else if (SplashKit.KeyTyped(KeyCode.RKey)) kindToAdd = ShapeKind.Rectangle;
                 else if (SplashKit.KeyTyped(KeyCode.CKey)) kindToAdd = ShapeKind.Circle;
                 else if (SplashKit.KeyTyped(KeyCode.LKey)) kindToAdd = ShapeKind.Line;
+                else if (SplashKit.KeyTyped(KeyCode.SKey)) canvas.Save(savePath);
                 else if (SplashKit.KeyTyped(KeyCode.DeleteKey) || SplashKit.KeyTyped(KeyCode.BackspaceKey))
-                    foreach(Shape shape in canvas.SelectedShapes)
+                    foreach (Shape shape in canvas.SelectedShapes)
                         canvas.RemoveShape(shape);
 
                 SplashKit.RefreshScreen();
